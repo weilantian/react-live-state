@@ -1,5 +1,6 @@
 import React from "react";
+import css from "./Component.module.scss";
 
 export const LiveStateWindow = () => {
-  return <div className=" text-xl bg-gray-300">Hello</div>;
+  return <div className={css.sjsc}>Hello</div>;
 };

@@ -1,8 +1,9 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
-import postcss from "rollup-plugin-postcss";
 import dts from "rollup-plugin-dts";
+import babel from "rollup-plugin-babel";
+import postcss from "rollup-plugin-postcss";
 
 const packageJson = require("./package.json");
 
@@ -24,12 +25,15 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
+      babel({
+        exclude: "node_modules/**",
+      }),
       typescript({ tsconfig: "./tsconfig.json" }),
       postcss({
         config: {
           path: "./postcss.config.js",
         },
-        extensions: [".css"],
+        modules: true,
         minimize: true,
         extract: true,
       }),
@@ -42,3 +46,5 @@ export default [
     external: [/\.css$/],
   },
 ];
+
+//TODO: https://medium.com/@tomaszmularczyk89/guide-to-building-a-react-components-library-with-rollup-and-styled-jsx-694ec66bd2
